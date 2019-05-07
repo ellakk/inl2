@@ -31,6 +31,9 @@ class ProductsController extends Controller
         $product->price = $request->input("price");
         $product->save();
 
+        foreach ($request->get("stores") as $store) {
+            $product->stores()->attach($store);
+        }
         return response()->json(["success" => true]);
     }
 
